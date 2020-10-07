@@ -2,7 +2,7 @@
   <div id="app" class="container">    
     <section>      
 
-        <b-modal v-model="isModalActive" has-modal-card>
+        <b-modal v-model="isOpen" has-modal-card>
             <form action="">
             <div class="modal-card" style="width: auto">
                 <header class="modal-card-head">
@@ -10,11 +10,12 @@
                     <button
                             type="button"
                             class="delete"
-                            @click="isModalActive = false"/>
+                            @click="isOpen = false"/>
                 </header>
                 <section class="modal-card-body">
                     <p class="title is-4">{{movie.Plot}}</p>
                     <br/>
+                    <p class="subtitle is-6">{{movie.Actors}}</p>
                     <br/>
                     <p class="subtitle is-6">Released - {{movie.Released}}</p>
                     <p>Rated - {{ movie.Rated }} </p>
@@ -44,16 +45,15 @@ import { getMovieDetails } from '../hooks/movie-api';
         default: ""        
       }
     },
-    setup({ title }) {
-      return { titleText: title };
-    },
     async mounted() {        
       let res = await getMovieDetails(this.imdbID);
       this.movie = res;
+      this.isOpen = this.isModalActive;
     },    
     data() {
       return {                
-        movie: {}
+        movie: {},
+        isOpen: false
       }
     }
   }
