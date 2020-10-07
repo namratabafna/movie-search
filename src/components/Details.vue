@@ -15,11 +15,15 @@
                 <section class="modal-card-body">
                     <p class="title is-4">{{movie.Plot}}</p>
                     <br/>
-                    <p class="subtitle is-6">{{movie.Actors}}</p>
+                    <p class="subtitle is-6">Actors - {{movie.Actors}}</p>
                     <br/>
                     <p class="subtitle is-6">Released - {{movie.Released}}</p>
                     <p>Rated - {{ movie.Rated }} </p>
                     <br>
+                    <p>Location - {{ movie.Country }}</p>
+                    <br/>
+                    <p>Language - {{ movie.Language }}</p>
+                    <br/>
                     <small>Rating - {{movie.imdbRating}}</small>                        
                 </section>                
             </div>

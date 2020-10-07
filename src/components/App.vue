@@ -1,20 +1,19 @@
 <template>
   <div class="app">
     <Header :title="'Movie Interface'" />
-    <b-dropdown aria-role="list">
-            <button class="button active" slot="trigger" slot-scope="{ active }">
-                <span>Sort By</span>
-                <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
+    <b-dropdown aria-role="list" v-model="param"  @change="onChange($event)">
+            <button class="button active" slot="trigger">
+                <span>Sort By</span>                
             </button>
 
-            <b-dropdown-item aria-role="listitem">Language</b-dropdown-item>
-            <b-dropdown-item aria-role="listitem">Location</b-dropdown-item>            
+            <b-dropdown-item value="Language" aria-role="listitem">Year</b-dropdown-item>
+            <b-dropdown-item value="Country" aria-role="listitem">Title</b-dropdown-item>            
     </b-dropdown>
     <Search :search="state.search" @search="handleSearch" />
     
     <p class="intro">Sharing a few of our favourite movies</p>
     <div class="movies">
-      <Movie v-for="movie in state.movies" :movie="movie" :key="movie.imdbID" />
+      <Movie v-for="movie in sortedMovies" :movie="movie" :key="movie.imdbID" />
     </div>     
   </div>
 </template>
@@ -28,6 +27,24 @@
   export default {
     name: 'app',
     components: { Header, Search, Movie },
+    methods: {
+      onChange(event) {
+        this.param = event;
+      }
+    },
+    data() {
+      return {
+        param: 'Year'
+      };
+    },
+    computed: {
+      sortedMovies () {
+          let moviesList = this.state.movies;
+          return moviesList.sort((a, b) => {
+          a[this.param] - b[this.param]
+        })
+      }
+    },
     setup() {
       const state = useMovieApi();
 

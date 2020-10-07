@@ -6,7 +6,7 @@
     </div>
     <p>{{ movie.Year }}</p>
     <button class="button active is-small"
-                @click="isCardModalActive = !isCardModalActive">
+                @click="isCardModalActive = true">
                 Movie Details
     </button>
     <Details v-if="isCardModalActive" :isModalActive ="isCardModalActive" :imdbID="movie.imdbID" />
