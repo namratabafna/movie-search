@@ -6,8 +6,8 @@
                 <span>Sort By</span>                
             </button>
 
-            <b-dropdown-item value="Language" aria-role="listitem">Year</b-dropdown-item>
-            <b-dropdown-item value="Country" aria-role="listitem">Title</b-dropdown-item>            
+            <b-dropdown-item value="Year" aria-role="listitem">Year</b-dropdown-item>
+            <b-dropdown-item value="Title" aria-role="listitem">Title</b-dropdown-item>            
     </b-dropdown>
     <Search :search="state.search" @search="handleSearch" />
     
@@ -37,13 +37,15 @@
         param: 'Year'
       };
     },
-    computed: {
-      sortedMovies () {
-          let moviesList = this.state.movies;
-          return moviesList.sort((a, b) => {
-          a[this.param] - b[this.param]
-        })
-      }
+    computed: {      
+      sortedMovies: function() {
+        function sortBy(a, b) {
+           if (a.Year < b.Year) return -1;
+           if (a.Year > b.Year) return 1;           
+           return 0;
+        }
+        return [...this.state.movies].sort(sortBy);
+     }
     },
     setup() {
       const state = useMovieApi();
