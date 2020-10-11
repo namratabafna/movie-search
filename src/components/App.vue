@@ -2,7 +2,7 @@
   <div class="app">
     <Header :title="'Movie Interface'" />
     <b-dropdown aria-role="list" v-model="param"  @change="onChange($event)">
-            <button class="button active" slot="trigger">
+            <button class="button" slot="trigger">
                 <span>Sort By</span>                
             </button>
 
@@ -39,12 +39,20 @@
     },
     computed: {      
       sortedMovies: function() {
-        function sortBy(a, b) {
+        //Default sort is Year. 
+        function sortByYear(a, b) {
            if (a.Year < b.Year) return -1;
            if (a.Year > b.Year) return 1;           
            return 0;
         }
-        return [...this.state.movies].sort(sortBy);
+
+        function sortByTitle(a, b) {
+            if (a.Title < b.Title) return -1;
+            if (a.Title > b.Title) return 1;  
+            return 0;     
+        }  
+
+        return this.param === 'Year' ? [...this.state.movies].sort(sortByYear) : [...this.state.movies].sort(sortByTitle);
      }
     },
     setup() {
@@ -65,6 +73,10 @@
   .app {
     text-align: center;
   }
+
+   .tag {
+        cursor: pointer;
+    }
 
   .header {
     background-color: #282c34;
