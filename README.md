@@ -1,4 +1,4 @@
-# movie-search-nam
+# movie-search
 
 Calls a Rest-API and fetches the movie names and its properties in the responsive and cross browser compliant web application. 
 
