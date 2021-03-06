@@ -3,7 +3,7 @@ const API_KEY = 'a5549d08';
 
 export const useMovieApi = () => {
   const state = reactive({
-    search: 'Joker',
+    search: 'Harry',
     loading: true,
     movies: []
   });
@@ -26,7 +26,6 @@ export const getMovieDetails = async (imdbID) => {
   const MOVIE_API_URL = `https://www.omdbapi.com/?i=${imdbID}&apikey=${API_KEY}`;
 
   let response = await fetch(MOVIE_API_URL)
-  const json = await response.json();
-  console.log(json);
+  const json = await response.json();  
   return json;
 }

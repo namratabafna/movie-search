@@ -1,12 +1,14 @@
 <template>
   <div class="app">
-    <Header :title="'Movie Interface'" />
-    <b-dropdown aria-role="list" v-model="param"  @change="onChange($event)">
+    <Header :title="'Movie Search Application'" />
+    <b-dropdown is-info aria-role="list" v-model="param"  @change="onChange($event)">
             <button class="button" slot="trigger">
                 <span>Sort By</span>                
             </button>
 
-            <b-dropdown-item value="Year" aria-role="listitem">Year</b-dropdown-item>
+            <b-dropdown-item value="Year" aria-role="listitem">
+              <span>Year</span>
+            </b-dropdown-item>
             <b-dropdown-item value="Title" aria-role="listitem">Title</b-dropdown-item>            
     </b-dropdown>
     <Search :search="state.search" @search="handleSearch" />
@@ -79,7 +81,7 @@
     }
 
   .header {
-    background-color: #282c34;
+    background-color:grey;
     height: 70px;
     display: flex;
     flex-direction: column;
